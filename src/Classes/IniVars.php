@@ -5,6 +5,7 @@ namespace vcamelot\RouteeTest\Classes;
 use vcamelot\RouteeTest\Exceptions\IniFile\IniFileMissingException;
 use vcamelot\RouteeTest\Exceptions\IniFile\IniVarsMissingException;
 use vcamelot\RouteeTest\Exceptions\IniFile\IniVarsEmptyException;
+use vcamelot\RouteeTest\Exceptions\PersonalData\PersonalDataMissingException;
 
 class IniVars
 {
@@ -38,7 +39,7 @@ class IniVars
      * @throws IniVarsMissingException
      * @throws IniVarsEmptyException
      */
-    public static function test()
+    public static function TestINIFile()
     {
         // Check presence of the .INI file
         if (!file_exists('test.ini')) {
@@ -64,5 +65,21 @@ class IniVars
         }
 
         return true;
+    }
+
+    public static function SavePersonalData($first_name, $last_name, $phone) {
+        $arg_list = get_defined_vars();
+        $empty_args = [];
+        foreach ($arg_list as $key => $value) {
+            if (empty($value)) {
+                $empty_args[] = $key;
+            }
+        }
+        if (!empty($empty_args)) {
+            throw new PersonalDataMissingException($empty_args);
+        }
+        self::$firstName = $first_name;
+        self::$lastName = $last_name;
+        self::$phone = $phone;
     }
 }
