@@ -9,6 +9,8 @@ use vcamelot\RouteeTest\Exceptions\PersonalData\PersonalDataMissingException;
 
 class IniVars
 {
+    private static $configFile = "src/Config/app.ini";
+
     // Required API configuration parameters
     private static $iniVarsRequired = [
         "openweather_api_key", "routee_app_id", "routee_app_secret", "city"
@@ -51,13 +53,14 @@ class IniVars
      */
     public static function testINIFile()
     {
+        var_dump(self::$configFile);
         // Check presence of the .INI file
-        if (!file_exists('test.ini')) {
+        if (!file_exists(self::$configFile)) {
             throw new IniFileMissingException();
         }
 
         // Check that all required .INI variables are present
-        $ini_vars_actual = parse_ini_file("test.ini");
+        $ini_vars_actual = parse_ini_file(self::$configFile);
         $ini_vars_diff = array_diff(self::$iniVarsRequired, array_keys($ini_vars_actual));
         if (!empty($ini_vars_diff)) {
             throw new IniVarsMissingException($ini_vars_diff);
