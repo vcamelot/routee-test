@@ -6,9 +6,6 @@ use vcamelot\RouteeTest\Classes\IniVars;
 
 class Notification
 {
-
-    private $firstName, $lastName, $phone;
-
     /**
      * Test INI file, validate personal data
      * 
@@ -19,8 +16,8 @@ class Notification
      */
     public function __construct($first_name, $last_name, $phone)
     {
-        IniVars::TestINIFile();
-        IniVars::SavePersonalData($first_name, $last_name, $phone);
+        IniVars::testINIFile();
+        IniVars::savePersonalData($first_name, $last_name, $phone);
     }
 
     /**
