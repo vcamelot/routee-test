@@ -1,15 +1,19 @@
 {
-  "name": "weather-api",
-  "type": "project",
+  "name": "vcamelot/routee-test",
   "description": "Test task for Routee",
-  "keywords": [
-    "php",
-    "openweatherapi"
-  ],
+  "type": "library",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "Dmitry Vinogradov",
+      "email": "vinogradov.dmitry@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
-      "Routee\\DvTest\\": "src/"
+      "vcamelot\\RouteeTest\\": "src/"
     }
-  }
+  },
+  "require": {}
 }

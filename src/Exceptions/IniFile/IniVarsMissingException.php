@@ -1,11 +1,21 @@
 <?php
 
-namespace Routee\DVTest\Exceptions\IniFile;
+namespace vcamelot\RouteeTest\Exceptions\IniFile;
 
-class IniVarsMissingException extends \Exception
+use Exception;
+
+class IniVarsMissingException extends Exception
 {
-    public function __construct($message, $code = 0, Exception $previous = null)
+    /**
+     * Throws an exception when some variables were assigned null value
+     *
+     * @param array          $vars
+     * @param int            $code
+     * @param Exception|null $previous
+     */
+    public function __construct($vars, $code = 0, Exception $previous = null)
     {
-        parent::__construct($message, $code, $previous);
+        parent::__construct("The following .INI vars are not assigned a value: "
+            . implode(",", $vars), $code, $previous);
     }
 }

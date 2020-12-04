@@ -1,9 +1,18 @@
 <?php
 
-namespace Routee\DVTest\Exceptions\IniFile;
+namespace vcamelot\RouteeTest\Exceptions\IniFile;
 
-class IniFileMissingException extends \Exception
+use Exception;
+
+class IniFileMissingException extends Exception
 {
+    /**
+     * Throws an exception when the .INI file was not found
+     *
+     * @param array          $vars
+     * @param int            $code
+     * @param Exception|null $previous
+     */
     public function __construct($message = ".INI file not found", $code = 0, Exception $previous = null)
     {
         parent::__construct($message, $code, $previous);

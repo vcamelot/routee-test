@@ -1,15 +1,15 @@
 <?php
 
-namespace Routee\DVTest\Classes;
+namespace vcamelot\RouteeTest\Classes;
 
-use Routee\DVTest\Exceptions\IniFile\IniFileMissingException;
-use Routee\DVTest\Exceptions\IniFile\IniVarsMissingException;
-use Routee\DVTest\Exceptions\IniFile\IniVarsEmptyException;
+use vcamelot\RouteeTest\Exceptions\IniFile\IniFileMissingException;
+use vcamelot\RouteeTest\Exceptions\IniFile\IniVarsMissingException;
+use vcamelot\RouteeTest\Exceptions\IniFile\IniVarsEmptyException;
 
 class IniVars
 {
     private static $iniVarsExpected = [
-        "openweather_api_key", "phone", "first_name", "last_name", "routee_app_id", "routee_app_secret"
+        "openweather_api_key", "routee_app_id", "routee_app_secret"
     ];
     private static $openWeatherAPIKey, $routeeAppId, $routeeAppSecret;
 
@@ -47,10 +47,9 @@ class IniVars
 
         // Check that all .INI variables are present
         $ini_vars_actual = parse_ini_file("test.ini");
-        $ini_vars_diff = array_diff(array_keys($ini_vars_actual), self::$iniVarsExpected);
+        $ini_vars_diff = array_diff(self::$iniVarsExpected, array_keys($ini_vars_actual));
         if (!empty($ini_vars_diff)) {
-            throw new IniVarsMissingException("The following .INI vars are missing: "
-                . implode(",", $ini_vars_diff));
+            throw new IniVarsMissingException($ini_vars_diff);
         }
 
         // Check that all .INI variables are initialized
@@ -61,11 +60,9 @@ class IniVars
             }
         }
         if (!empty($ini_vars_empty)) {
-            throw new IniVarsEmptyException("The following .INI vars are not assigned a value: "
-                . implode(",", $ini_vars_empty));
+            throw new IniVarsEmptyException($ini_vars_empty);
         }
 
         return true;
     }
-
 }

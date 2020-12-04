@@ -1,24 +1,11 @@
 <?php
-namespace Routee\DVTest;
-use Routee\DVTest\Classes\IniVars;
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Max-Age: 1000');
-header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Authorization');
+require_once __DIR__ . '/vendor/autoload.php';
 
-spl_autoload_register(function ($className) {
-    $file = str_replace("Routee\DVTest", "", $className) . ".php";
-    if (file_exists("src/" . $file)) {
-        require_once("src/" . $file);
-    } else {
-        throw new \Exception("Class " . $className . " not defined");
-    }
-});
+use vcamelot\RouteeTest\Notification\Notification;
 
-// Initialize and validate configuration variables
 try {
-    IniVars::test();
-} catch (\Exception $e) {
+    $notification = new Notification('Dmitry', 'Vinogradov', '+380503723788');
+} catch (Exception $e) {
     echo $e->getMessage();
 }

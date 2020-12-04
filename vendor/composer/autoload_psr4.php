@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Routee\\DvTest\\' => array($baseDir . '/src'),
+    'vcamelot\\RouteeTest\\' => array($baseDir . '/src'),
 );
