@@ -1,0 +1,15 @@
+{
+  "name": "weather-api",
+  "type": "project",
+  "description": "Test task for Routee",
+  "keywords": [
+    "php",
+    "openweatherapi"
+  ],
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Routee\\DvTest\\": "src/"
+    }
+  }
+}
