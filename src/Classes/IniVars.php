@@ -9,12 +9,22 @@ use vcamelot\RouteeTest\Exceptions\PersonalData\PersonalDataMissingException;
 
 class IniVars
 {
-    private static $iniVarsExpected = [
-        "openweather_api_key", "routee_app_id", "routee_app_secret"
+    // Required API configuration parameters
+    private static $iniVarsRequired = [
+        "openweather_api_key", "routee_app_id", "routee_app_secret", "city"
     ];
     private static $openWeatherAPIKey, $routeeAppId, $routeeAppSecret;
+    public static $city;
 
+    // Required SMS configuration parameters
     public static $firstName, $lastName, $phone;
+
+    // Optional SMS configuration parameters
+    private static $tempThreshold, $smsNumber, $smsWaitPeriod;
+
+    //
+    // Getters for API keys
+    //
 
     public static function getAPIKey()
     {
@@ -34,7 +44,7 @@ class IniVars
     /**
      * Check .INI file presence. Check correct names of .INI variables. Check that there are no unassigned variables.
      *
-     * @return bool
+     * @return void
      * @throws IniFileMissingException
      * @throws IniVarsMissingException
      * @throws IniVarsEmptyException
@@ -46,14 +56,14 @@ class IniVars
             throw new IniFileMissingException();
         }
 
-        // Check that all .INI variables are present
+        // Check that all required .INI variables are present
         $ini_vars_actual = parse_ini_file("test.ini");
-        $ini_vars_diff = array_diff(self::$iniVarsExpected, array_keys($ini_vars_actual));
+        $ini_vars_diff = array_diff(self::$iniVarsRequired, array_keys($ini_vars_actual));
         if (!empty($ini_vars_diff)) {
             throw new IniVarsMissingException($ini_vars_diff);
         }
 
-        // Check that all .INI variables are initialized
+        // Check that all required .INI variables are initialized
         $ini_vars_empty = [];
         foreach ($ini_vars_actual as $key => $value) {
             if (empty($value)) {
@@ -64,10 +74,26 @@ class IniVars
             throw new IniVarsEmptyException($ini_vars_empty);
         }
 
-        return true;
+        // Mandatory parameters without default values
+        self::$openWeatherAPIKey = $ini_vars_actual['openweather_api_key'];
+        self::$routeeAppId = $ini_vars_actual['routee_app_id'];
+        self::$routeeAppSecret = $ini_vars_actual['routee_app_secret'];
+        self::$city = $ini_vars_actual['city'];
+
+        // Optional configuration parameters
+        self::$tempThreshold = $ini_vars_actual['temp_threshold'] ?? 20.00;
+        self::$smsNumber = $ini_vars_actual['sms_number'] ?? 10;
+        self::$smsWaitPeriod = $ini_vars_actual['sms_wait_period'] ?? 10;
     }
 
-    public static function savePersonalData($first_name, $last_name, $phone) {
+    /**
+     * Validate personal data and save to class instance
+     * 
+     * @return void
+     * @throws PersonalDataMissingException
+     */
+    public static function savePersonalData($first_name, $last_name, $phone)
+    {
         $arg_list = get_defined_vars();
         $empty_args = [];
         foreach ($arg_list as $key => $value) {
