@@ -15,7 +15,7 @@ class IniVarsMissingException extends Exception
      */
     public function __construct($vars, $code = 0, Exception $previous = null)
     {
-        parent::__construct("The following .INI vars are not assigned a value: "
+        parent::__construct("The following .INI vars are not defined: "
             . implode(",", $vars), $code, $previous);
     }
 }
