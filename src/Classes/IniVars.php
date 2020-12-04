@@ -39,7 +39,7 @@ class IniVars
      * @throws IniVarsMissingException
      * @throws IniVarsEmptyException
      */
-    public static function TestINIFile()
+    public static function testINIFile()
     {
         // Check presence of the .INI file
         if (!file_exists('test.ini')) {
@@ -67,7 +67,7 @@ class IniVars
         return true;
     }
 
-    public static function SavePersonalData($first_name, $last_name, $phone) {
+    public static function savePersonalData($first_name, $last_name, $phone) {
         $arg_list = get_defined_vars();
         $empty_args = [];
         foreach ($arg_list as $key => $value) {
