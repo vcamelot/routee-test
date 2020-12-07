@@ -5,6 +5,7 @@ namespace vcamelot\RouteeTest\Notification;
 use Exception;
 use vcamelot\RouteeTest\Classes\IniVars;
 use vcamelot\RouteeTest\Classes\Weather;
+use vcamelot\RouteeTest\Classes\SMSTransfer;
 
 class Notification
 {
@@ -42,6 +43,9 @@ class Notification
             $weather = new Weather();
             $temp = $weather->getTemperature();
             echo $temp;
+
+            $transfer = new SMSTransfer($this->firstName, $this->lastName, $this->phone);
+            $transfer->send();
         }
         catch(Exception $e) {
             $this->errorMessage = $e->getMessage();

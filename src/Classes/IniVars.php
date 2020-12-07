@@ -53,7 +53,6 @@ class IniVars
      */
     public static function testINIFile()
     {
-        var_dump(self::$configFile);
         // Check presence of the .INI file
         if (!file_exists(self::$configFile)) {
             throw new IniFileMissingException();

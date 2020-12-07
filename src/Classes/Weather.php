@@ -25,7 +25,8 @@ class Weather
      * Gets temperature for specified city
      * 
      * @return float
-     * @throws vcamelot\RouteeTest\Exceptions\WeatherMap\MapAPIException;
+     * @throws vcamelot\RouteeTest\Exceptions\WeatherMap\MapAPIException
+     * @throws GuzzleHttp\Exception\GuzzleException;
      */
     public function getTemperature()
     {
