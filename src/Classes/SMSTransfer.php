@@ -72,10 +72,11 @@ class SMSTransfer extends BaseTransfer
 
         $curl = curl_init();
 
+        $temperatureThreshold = IniVars::getTemperatureThreshold();
         $body = [
             'body' => IniVars::$firstName . " " . IniVars::$lastName .
-                " Temperature " . ($temperature >= 20 ? "more" : "less") .
-                " than 20 C. It is " . $temperature . " C",
+                " Temperature " . ($temperature >= $temperatureThreshold ? "more" : "less") .
+                " than " . $temperatureThreshold . " C. It is " . $temperature . " C",
             'to' => IniVars::$phone,
             'from' => 'amdTelecom'
         ];

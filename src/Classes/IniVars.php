@@ -43,6 +43,11 @@ class IniVars
         return self::$routeeAppSecret;
     }
 
+    public static function getTemperatureThreshold()
+    {
+        return self::$tempThreshold;
+    }
+
     /**
      * Check .INI file presence. Check correct names of .INI variables. Check that there are no unassigned variables.
      *
@@ -83,7 +88,7 @@ class IniVars
         self::$city = $ini_vars_actual['city'];
 
         // Optional configuration parameters
-        self::$tempThreshold = $ini_vars_actual['temp_threshold'] ?? 20.00;
+        self::$tempThreshold = $ini_vars_actual['temp_threshold'] ?? 20;
         self::$smsNumber = $ini_vars_actual['sms_number'] ?? 10;
         self::$smsWaitPeriod = $ini_vars_actual['sms_wait_period'] ?? 10;
     }
