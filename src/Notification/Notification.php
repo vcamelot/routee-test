@@ -41,11 +41,11 @@ class Notification
             IniVars::savePersonalData($this->firstName, $this->lastName, $this->phone);    
 
             $weather = new Weather();
-            $temp = $weather->getTemperature();
-            echo $temp;
+            $temperature = $weather->getTemperature();            
 
             $transfer = new SMSTransfer($this->firstName, $this->lastName, $this->phone);
-            $transfer->send();
+            $this->errorMessage = $transfer->send($temperature);
+            return true;
         }
         catch(Exception $e) {
             $this->errorMessage = $e->getMessage();

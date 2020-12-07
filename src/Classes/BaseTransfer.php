@@ -4,5 +4,5 @@ namespace vcamelot\RouteeTest\Classes;
 
 abstract class BaseTransfer
 {
-    abstract function send();
+    abstract function send($temperature);
 }
