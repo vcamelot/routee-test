@@ -43,7 +43,7 @@ class Notification
             $weather = new Weather();
             $temperature = $weather->getTemperature();            
 
-            $transfer = new SMSTransfer($this->firstName, $this->lastName, $this->phone);
+            $transfer = new SMSTransfer();
             $this->errorMessage = $transfer->send($temperature);
             return true;
         }

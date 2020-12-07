@@ -8,19 +8,15 @@ use vcamelot\RouteeTest\Exceptions\RouteeAPI\RouteeAPIException;
 
 class SMSTransfer extends BaseTransfer
 {
-    private $firstName, $lastName, $phone;
     private $routeeToken;
 
     /**
-     * Save user name and phone in private variables
+     * Empty constructor
      * 
      * @return void
      */
-    public function __construct($first_name, $last_name, $phone)
+    public function __construct()
     {
-        $this->firstName = $first_name;
-        $this->lastName = $last_name;
-        $this->phone = $phone;
     }
 
     /**
@@ -77,10 +73,10 @@ class SMSTransfer extends BaseTransfer
         $curl = curl_init();
 
         $body = [
-            'body' => $this->firstName . " " . $this->lastName .
+            'body' => IniVars::$firstName . " " . IniVars::$lastName .
                 " Temperature " . ($temperature >= 20 ? "more" : "less") .
                 " than 20 C. It is " . $temperature . " C",
-            'to' => $this->phone,
+            'to' => IniVars::$phone,
             'from' => 'amdTelecom'
         ];
 
